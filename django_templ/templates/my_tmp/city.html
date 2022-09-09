@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dependent Dropdown in Django</title>
+</head>
+<body>
+<h2>Person Form</h2>
+
+<form method="post" id="personForm" data-cities-url="{% url 'province:ajax_districts' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit">
+</form>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+    $("#id_province").change(function () {
+        const url = $("#personForm").attr("data-cities-url");  // get the url of the `load_cities` view
+        const id_province = $(this).val();  // get the selected country ID from the HTML input
+
+        $.ajax({                       // initialize an AJAX request
+            url: url,                    // set the url of the request (= /persons/ajax/load-cities/ )
+            data: {
+                'id_province': id_province       // add the country id to the GET parameters
+            },
+            success: function (data) { 
+                console.log(data)
+                // `data` is the return of the `load_cities` view function
+                // $("#id_district").html(data);  // replace the contents of the city input with the data that came from the server
+                
+                let html_data = '<option value="">---------</option>';
+                data.forEach(function (districts) {
+                    html_data += `<option value="${districts.id}">${districts.name_with_type}</option>`
+                });
+                console.log(html_data);
+                $("#id_district").html(html_data);
+                
+            }
+        });
+
+    });
+
+    $("#id_district").change(function () {
+        const url = "/province/ajax/wards/";  // get the url of the `load_cities` view
+        const id_district = $(this).val();  // get the selected country ID from the HTML input
+
+        $.ajax({                       // initialize an AJAX request
+            url: url,                    // set the url of the request (= /persons/ajax/load-cities/ )
+            data: {
+                'id_district': id_district       // add the country id to the GET parameters
+            },
+            success: function (data) { 
+                console.log(data)
+                // `data` is the return of the `load_cities` view function
+                // $("#id_district").html(data);  // replace the contents of the city input with the data that came from the server
+                
+                let html_data = '<option value="">---------</option>';
+                data.forEach(function (wards) {
+                    html_data += `<option value="${wards.id}">${wards.name_with_type}</option>`
+                });
+                console.log(html_data);
+                $("#id_ward").html(html_data);
+                
+            }
+        });
+
+    });
+</script>
+
+</body>
+</html>

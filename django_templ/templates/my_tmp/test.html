@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+      
+<head>
+    <title>
+        Change selected value
+        of a drop-down list 
+    </title>
+      
+    <style>
+        div {
+            width:15%;
+            background-color:green;
+            padding:8px;
+            color:azure;
+        }
+    </style>
+      
+    <script src=
+        "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+    </script>
+      
+    <script type="text/javascript">
+        function getNewVal(item)
+            {
+            alert(item.value);
+            } 
+    </script>
+</head>
+  
+<body>
+    <div>
+        <p id="gfg">GeeksforGeeks courses:</p>
+  
+        <select id="select" onchange="getNewVal(this);">                                             
+            <option value="0">System Design</option>
+            <option value="1">DSA-Online</option>
+            <option value="2">Fork Python</option>
+            <option value="3">Fork Java</option>
+        </select> 
+    </div>
+</body>
+  
+</html>      
