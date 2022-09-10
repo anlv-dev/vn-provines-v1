@@ -3,7 +3,7 @@ from .models import City, District, Ward, Address
 
 
 class AddressAdmin(admin.ModelAdmin):
-    list_display = ['id', 'first_name', 'middle_name', 'last_name', 'province', 'district', 'ward', 'used']
+    list_display = ['id', 'first_name', 'middle_name', 'last_name', 'province', 'district', 'ward', 'street', 'building', 'house_no', 'used']
 
 class CityAdmin(admin.ModelAdmin):
     list_display = ['id', 'code', 'name', 'slug', 'type', 'name_with_type']
