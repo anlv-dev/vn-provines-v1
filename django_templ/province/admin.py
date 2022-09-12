@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import City, District, Ward, Address, Site, Company, Department, Person, RelationshipPerson, PrivatePhone, CompanyPhone
+from .models import City, District, Ward, Address, Site, Company, Department, Person, RelationshipPerson, PrivatePhone, CompanyPhone,Position
 
 
 class AddressAdmin(admin.ModelAdmin):
@@ -48,6 +48,9 @@ class PrivatePhoneAdmin(admin.ModelAdmin):
 class CompanyPhoneAdmin(admin.ModelAdmin):
     list_display = ['id', 'number', 'phone_type', 'isActived']
 
+class PositionAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name', 'short_name', 'is_actived']
+
 admin.site.register(Address, AddressAdmin)
 admin.site.register(City, CityAdmin)
 admin.site.register(District, DistrictAdmin)
@@ -59,3 +62,4 @@ admin.site.register(RelationshipPerson,RelationshipPersonAdmin)
 admin.site.register(Person,PersonAdmin)
 admin.site.register(PrivatePhone,PrivatePhoneAdmin)
 admin.site.register(CompanyPhone,CompanyPhoneAdmin)
+admin.site.register(Position,PositionAdmin)

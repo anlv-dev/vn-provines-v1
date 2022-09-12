@@ -131,6 +131,15 @@ class Department(models.Model):
         return self.short_name
 
 
+class Position(models.Model):
+    name = models.CharField(max_length=100, blank=True, null=True)
+    short_name = models.CharField(max_length=20, blank=True, null=True)
+    is_actived = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.short_name 
+
+
 class RelationshipPerson(models.Model):
     firstname = models.CharField(max_length=20,blank=True, null=True)
     middlename = models.CharField(max_length=20,blank=True, null=True)
@@ -164,6 +173,7 @@ class Person(models.Model):
     vo_chung_cty = models.BooleanField(default=False)
     private_phone = models.ForeignKey(PrivatePhone, on_delete=models.SET_NULL, blank=True, null=True)
     company_phone =models.ManyToManyField(CompanyPhone)
+    position = models.ManyToManyField(Position)
 
     def __str__(self):
         return self.lastname
